@@ -1,34 +1,26 @@
 import React from "react";
+import FormUser from "./FormUser";
+import UserDate from "./UserDate";
 
 class MyComponent extends React.Component {
   state = {
-    name: "Eric",
-    age: 26,
-    like: "girl",
-    count: 0,
+    listusers: [
+      { id: 1, name: "quachhoangbo", age: 20 },
+      { id: 2, name: "quachhoangbo2", age: 30 },
+      { id: 3, name: "quachhoangbo3", age: 40 },
+    ],
   };
-
-  CountNumber() {
-    this.setState({ count: Math.floor(Math.random() * 100) + 1 });
-  }
-
+  addUser = (user) => {
+    this.setState({
+      listusers: [...this.state.listusers, user],
+    });
+  };
   render() {
     return (
       <div className="container">
-        <h1>Hello World</h1>
-        <h1>
-          My name is {this.state.name} {this.state.age} years old and i like{" "}
-          {this.state.like}
-        </h1>
-        <button
-          onClick={() => {
-            this.setState({ like: "boy" });
-          }}
-        >
-          click me
-        </button>
-        <button onClick={() => this.CountNumber()}>tăng số</button>
-        <h2>{this.state.count}</h2>
+        <FormUser addUser={this.addUser} />
+        <hr />
+        <UserDate listusers={this.state.listusers} />
       </div>
     );
   }
