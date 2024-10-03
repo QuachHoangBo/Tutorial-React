@@ -1,29 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import FormUser from "./FormUser";
 import UserDate from "./UserDate";
 
-class MyComponent extends React.Component {
-  state = {
-    listusers: [
-      { id: 1, name: "quachhoangbo", age: 20 },
-      { id: 2, name: "quachhoangbo2", age: 30 },
-      { id: 3, name: "quachhoangbo3", age: 40 },
-    ],
+const MyComponent = (props) => {
+  const [listusers, setlistusers] = useState([
+    { id: 1, name: "hoangbo", age: 20 },
+  ]);
+
+  const addUser = (user) => {
+    setlistusers([...listusers, user]);
+    console.log(listusers);
   };
-  addUser = (user) => {
-    this.setState({
-      listusers: [...this.state.listusers, user],
-    });
+  const deleteUser = (user) => {
+    setlistusers(listusers.filter((item) => item.id !== user.id));
+    console.log(listusers);
   };
-  render() {
-    return (
+  return (
+    <>
       <div className="container">
-        <FormUser addUser={this.addUser} />
+        <FormUser addUser={addUser} />
         <hr />
-        <UserDate listusers={this.state.listusers} />
+        <UserDate listusers={listusers} deleteUser={deleteUser} />
       </div>
-    );
-  }
-}
-<style>.container {}</style>;
+    </>
+  );
+};
 export default MyComponent;

@@ -1,50 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import "./FormUser.scss";
-class FormUser extends React.Component {
-  state = {
-    id: Math.floor(Math.random() * (100 - 10 + 1)) + 10,
+const FormUser = (props) => {
+  const [user, setUser] = useState({
     name: "",
     age: 0,
-  };
-  onSubmitChanege = (event) => {
+  });
+  const onSubmitChanege = (event) => {
     event.preventDefault();
-    this.props.addUser(this.state);
+    // tắt sự kiên load lại khi nhấn enter trong form
+    props.addUser({
+      id: Math.floor(Math.random() * 100) + 10,
+      name: user.name,
+      age: user.age,
+    });
   };
 
-  render() {
-    return (
-      <div>
-        <form
-          onSubmit={(event) => {
-            this.onSubmitChanege(event);
-          }}
-          className="formUser"
-        >
-          <label className="labeltext">
-            Nhập tên:
-            <input
-              type="text"
-              onChange={(event) => {
-                this.setState({ name: event.target.value });
-              }}
-            />
-          </label>
-          <h1>{this.state.name}</h1>
-          <label>
-            Nhập tuổi:
-            <input
-              type="text"
-              onChange={(event) => {
-                this.setState({ age: event.target.value });
-              }}
-            />
-          </label>
-          <h1>{this.state.age}</h1>
-          <button>Click</button>
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <form
+        onSubmit={(event) => {
+          onSubmitChanege(event);
+        }}
+        className="formUser"
+      >
+        <label className="labeltext">
+          Nhập tên:
+          <input
+            type="text"
+            onChange={(event) => {
+              user.name = event.target.value;
+            }}
+          />
+        </label>
+        <h1>{user.name}</h1>
+        <label>
+          Nhập tuổi:
+          <input
+            type="text"
+            onChange={(event) => {
+              user.age = event.target.value;
+            }}
+          />
+        </label>
+        <h1>{user.age}</h1>
+        <button>Click</button>
+      </form>
+    </div>
+  );
+};
 
 export default FormUser;
