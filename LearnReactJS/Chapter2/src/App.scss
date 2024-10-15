@@ -13,7 +13,13 @@ code {
 }
 
 .App {
-  text-align: center;
+  .navbar-nav {
+    .nav-link {
+      &.active {
+        color: blue;
+      }
+    }
+  }
 }
 
 .App-logo {
