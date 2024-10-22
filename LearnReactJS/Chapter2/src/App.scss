@@ -13,6 +13,10 @@ code {
 }
 
 .App {
+  ::selection {
+    background-color: #ffb7b7; // Màu nền khi bôi đen trong thẻ p
+    color: #ffffff; // Màu chữ khi bôi đen trong thẻ p
+  }
   .navbar-nav {
     .nav-link {
       &.active {
